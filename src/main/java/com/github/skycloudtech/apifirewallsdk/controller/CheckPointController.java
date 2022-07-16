@@ -39,17 +39,21 @@ public class CheckPointController {
             @SneakyThrows
             @Override
             public void onResponse(@Nullable Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
-                System.out.println(response.body());
-                log.error("请求成功！{}", response);
-                log.error("请求成功！{}", response.raw());
-                log.error("请求成功！{}", response.errorBody().string());
+                log.info("请求成功！{}", response);
+                log.info("请求成功！{}", response.raw());
 
+
+                /**
+                 * 要先判断是一个成功请求还是一个失败请求，决定调用哪个方法获取返回数据
+                 */
                 if (response.isSuccessful()) {
                     // tasks available
-                    log.error("tasks available");
+                    log.info("tasks available");
+                    log.info("请求成功！{}", response.body());
                 } else {
                     // error response, no access to resource?
                     log.error("error response, no access to resource?");
+                    log.error("请求失败！{}", response.errorBody().string());
                 }
             }
 
